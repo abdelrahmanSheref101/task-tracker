@@ -5,14 +5,27 @@ import { getFirestore } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
+const {
+        VITE_FIREBASE_API_KEY,
+        VITE_FIREBASE_AUTH_DOMAIN,
+        VITE_FIREBASE_PROJECT_ID,
+        VITE_FIREBASE_STORAGE_BUCKET,
+        VITE_FIREBASE_MESSAGING_SENDER_ID,
+        VITE_FIREBASE_APP_ID,
+} = import.meta.env;
+
+if (!VITE_FIREBASE_API_KEY || !VITE_FIREBASE_PROJECT_ID) {
+        console.error("Missing VITE_FIREBASE_* env vars at build time.");
+}
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
-        apiKey: "AIzaSyCNjBGqd3GNAljTUTYpTh8oCG7tfVRAEFw",
-        authDomain: "taskmanagerapp-ad7b5.firebaseapp.com",
-        projectId: "taskmanagerapp-ad7b5",
-        storageBucket: "taskmanagerapp-ad7b5.firebasestorage.app",
-        messagingSenderId: "48752406091",
-        appId: "1:48752406091:web:530434c6a87ab25346a7ce"
+        apiKey: String(VITE_FIREBASE_API_KEY),
+        authDomain: String(VITE_FIREBASE_AUTH_DOMAIN),
+        projectId: String(VITE_FIREBASE_PROJECT_ID),
+        storageBucket: String(VITE_FIREBASE_STORAGE_BUCKET),
+        messagingSenderId: String(VITE_FIREBASE_MESSAGING_SENDER_ID),
+        appId: String(VITE_FIREBASE_APP_ID)
 };
 
 // Initialize Firebase
