@@ -1,0 +1,33 @@
+name: Deploy to Firebase Hosting
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # or the version your project needs
+
+      - name: Install dependencies
+        run: npm ci
+        # if you use yarn: run: yarn install --frozen-lockfile
+
+      - name: Build
+        env:
+          # If you have client env vars stored in GitHub Secrets, expose them here:
+          # REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+        run: npm run build
+
+      - name: Deploy to Firebase Hosting
+        # Use npx so you don't need a global firebase-tools install
+        run: npx firebase-tools deploy --only hosting --token "${{ secrets.FIREBASE_TOKEN }}"
+
+
