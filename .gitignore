@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+# deploying
+.firebaserc
+firebase-debug.log
+
